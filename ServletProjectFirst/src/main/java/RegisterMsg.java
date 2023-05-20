@@ -83,13 +83,14 @@ public class RegisterMsg extends HttpServlet {
 					}
 				}
 				// Inserting data into database using prepared statement
-				PreparedStatement ps = conn.prepareStatement("insert into signup values(?,?,?,?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("insert into signup values(?,?,?,?,?,?,?)");
 				ps.setInt(1, ++count);
 				ps.setString(2, sd1.getName());
 				ps.setString(3, sd1.getPassword());
 				ps.setString(4, sd1.getEmail());
 				ps.setString(5, sd1.getMobile());
 				ps.setString(6, sd1.getDob());
+				ps.setBoolean(7, false);
 				ps.executeUpdate();
 				
 			} catch (Exception e) {
@@ -100,7 +101,6 @@ public class RegisterMsg extends HttpServlet {
 		if (email != null && password != null) {
 			RequestDispatcher rd2 = request.getRequestDispatcher("Login");
 			rd2.forward(request, response);
-			pw.print("<p style ='color: green'>You have successfully registered");
 		} else {
 			pw.print("<p style = 'color: red'>Some data are missing");
 		}
